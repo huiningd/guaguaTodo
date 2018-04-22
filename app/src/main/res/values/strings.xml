@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Guagua Todo</string>
+    <string name="title_todo_list">Todo List</string>
+    <string name="title_todo_item_detail">TodoItem Detail</string>
+</resources>
