@@ -1,21 +1,26 @@
 package fi.huiningd.guaguatodo
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
-import fi.huiningd.guaguatodo.data.MyApp
+import android.util.Log
+import android.view.View
 
 import fi.huiningd.guaguatodo.data.TodoItem
+
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_todo_list.*
 
 import kotlinx.android.synthetic.main.todo_list.*
+import java.util.*
 import kotlin.collections.ArrayList
 
+
 /**
- * An activity representing a list of Pings. This activity
+ * An activity representing a list of todoItems. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
  * lead to a [TodoItemDetailActivity] representing
@@ -30,7 +35,9 @@ class TodoListActivity : AppCompatActivity() {
      */
     private var mTwoPane: Boolean = false
     private lateinit var mAdapter: TodoListRecyclerViewAdapter
-    private var mTodoList: MutableList<TodoItem> = ArrayList()
+    //private var mTodoList: MutableList<TodoItem> = ArrayList()
+
+    private var mDatabase = TodoApp.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +46,10 @@ class TodoListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        /*fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }*/
+        add_todo.setOnClickListener { view ->
+            val intent = Intent( view.context, AddNewTodoActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_ADD_TODO)
+        }
 
         if (todoitem_detail_container != null) {
             // The detail container view will be present only in the
@@ -52,41 +59,53 @@ class TodoListActivity : AppCompatActivity() {
             mTwoPane = true
         }
 
-        //createDummyData()
-        //retrieveData()
+        loadTodoList()
         setupRecyclerView(rv_todo_list)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        mAdapter = TodoListRecyclerViewAdapter(this, mTodoList, mTwoPane)
+        mAdapter = TodoListRecyclerViewAdapter(this, mTwoPane)
         recyclerView.adapter = mAdapter
     }
 
-    private fun createDummyData() {
-        createTodo("Take trash out")
-        createTodo("Take trash out2")
-        createTodo("Take trash out3")
-        createTodo("Take trash out4")
-        createTodo("Take trash out5")
-    }
-
-    private fun retrieveData() {
-        MyApp.database?.todoItemDao()?.getAllTodoItems()
+    private fun loadTodoList() {
+        //Log.e(TAG, "loadTodoList")
+        mDatabase?.todoItemDao()?.getAllTodoItems()
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe { todoList ->
                     mAdapter.updateList(todoList)
+                    if (todoList.isNotEmpty()) {
+                        empty_placeholder.visibility = View.GONE
+                    }
                 }
     }
 
-    private fun createTodo(title: String) {
-        val todo = TodoItem(0, title, 12345, false, false)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-        Single.fromCallable {
-            MyApp.database?.todoItemDao()?.insert(todo)
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+        if (requestCode == REQUEST_CODE_ADD_TODO && resultCode == RESULT_OK) {
+            val newTodoTitle = data?.getStringExtra(KEY_NEW_TODO_TITLE) as String
+            val date = data.getSerializableExtra(KEY_NEW_TODO_DATE) as Date
+            Log.e("date is ", date.toString())
+
+            val newItem = TodoItem(0, newTodoTitle, date.time, false, false)
+            saveNewItemToRoom(newItem)
+        }
     }
 
+    private fun saveNewItemToRoom(newItem: TodoItem) {
+        Single.fromCallable { mDatabase?.todoItemDao()?.insert(newItem) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+    }
+
+
+    companion object {
+        const val REQUEST_CODE_ADD_TODO = 1
+        const val KEY_NEW_TODO_TITLE = "title"
+        const val KEY_NEW_TODO_DATE = "date"
+    }
 
 }

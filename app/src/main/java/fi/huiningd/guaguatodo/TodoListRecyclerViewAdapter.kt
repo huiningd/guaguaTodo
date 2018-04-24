@@ -3,6 +3,7 @@ package fi.huiningd.guaguatodo
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +14,13 @@ import kotlinx.android.synthetic.main.todo_list_content.view.*
 
 
 class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
-                                  private val mValues: List<TodoItem>,
                                   private val mTwoPane: Boolean) :
         RecyclerView.Adapter<TodoListRecyclerViewAdapter.ViewHolder>() {
 
 
     private val mOnClickListener: View.OnClickListener
-    private var mTodoList: List<TodoItem> = ArrayList()
+    private var mTodoList: MutableList<TodoItem> = ArrayList()
+
 
     init {
         mOnClickListener = View.OnClickListener { v ->
@@ -50,7 +51,7 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mValues[position]
+        val item = mTodoList[position]
         holder.mTodoTitleView.text = item.title
 
         with(holder.itemView) {
@@ -60,11 +61,12 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
     }
 
     override fun getItemCount(): Int {
-        return mValues.size
+        return mTodoList.size
     }
 
     fun updateList(list: List<TodoItem>) {
-        mTodoList = list
+        Log.e("###", "updateList")
+        mTodoList = list.toMutableList()
         notifyDataSetChanged()
     }
 
