@@ -28,6 +28,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fi.huiningd.guaguatodo.TodoListActivity" />
         </activity>
+        <activity
+            android:name=".AddNewTodoActivity"
+            android:label="@string/title_add_new_todo"
+        />
     </application>
 
 </manifest>
