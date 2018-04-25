@@ -3,6 +3,7 @@ package fi.huiningd.guaguatodo.data
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
+import java.util.Date
 
 const val TABLE_NAME = "todo_items"
 
@@ -11,9 +12,9 @@ data class TodoItem(
         @PrimaryKey(autoGenerate = true)
         val uid: Long,
 
-        val title: String = "",
-        val date: Long,
-        val isDone : Boolean = false,
-        val isStarred : Boolean = false,
-        val description: String = ""
+        var title: String = "",
+        var date: Long,
+        var isDone : Boolean = false,
+        var isStarred : Boolean = false,
+        var description: String = ""
 )
