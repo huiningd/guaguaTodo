@@ -29,11 +29,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/button_add_todo"
+            android:background="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:srcCompat="@drawable/ic_add" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add TODO"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_margin="8dp"
+            android:text="@string/add_todo" />
 
     </LinearLayout>
 
@@ -43,7 +51,34 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
+
         <include layout="@layout/todo_list" />
+
+        <LinearLayout
+            android:id="@+id/empty_placeholder"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:textAlignment="center"
+                android:text="@string/please_add_todo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_input_add" />
+
+        </LinearLayout>
+
+
     </FrameLayout>
 
 </LinearLayout>
