@@ -12,4 +12,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="fi.huiningd.guaguatodo.TodoListActivity"
-    tools:listitem="@layout/todo_list_content" />
+    tools:listitem="@layout/todo_item_content" />
