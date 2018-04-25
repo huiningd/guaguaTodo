@@ -3,6 +3,7 @@ package fi.huiningd.guaguatodo
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,8 +23,6 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
         fun toggleDone(isDone: Boolean, item: TodoItem)
         fun toggleStarred(isStarred: Boolean, item: TodoItem)
     }
-
-    private val TAG = "RecyclerViewAdapter"
 
     private var mListItemListener : ListItemListener? = null
     private val mDetailViewListener: View.OnClickListener
@@ -67,10 +66,8 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mTodoList[position]
 
-        with(holder.itemView) {
-            tag = item
-            holder.bind(item, mListItemListener)
-        }
+        holder.todoTitleView.tag = item
+        holder.bind(item, mListItemListener)
     }
 
     override fun getItemCount(): Int {
@@ -78,7 +75,7 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
     }
 
     fun updateList(list: List<TodoItem>) {
-        //Log.e(TAG, "updateList")
+        Log.e(TAG, "updateList")
         mTodoList = list.toMutableList()
         notifyDataSetChanged() // TODO make comparison with the old list, only refresh single item
     }
@@ -93,9 +90,9 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
         textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
     }
 
-    inner class ViewHolder(mView: View ) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
+        val todoTitleView: TextView = mView.todo_title
         private val checkBox: CheckBox = mView.check_box
-        private val todoTitleView: TextView = mView.todo_title
 
         fun bind(todoItem: TodoItem, mListener: ListItemListener?) {
             // Set listener to null so that the immediate isChecked does not trigger the listener
@@ -114,6 +111,10 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
             todoTitleView.text = todoItem.title
             todoTitleView.setOnClickListener(mDetailViewListener)
         }
+    }
+
+    companion object {
+        const val TAG = "RecyclerViewAdapter"
     }
 
 }
