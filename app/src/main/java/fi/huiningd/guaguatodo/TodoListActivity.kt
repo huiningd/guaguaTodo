@@ -27,17 +27,18 @@ import kotlin.collections.ArrayList
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class TodoListActivity : AppCompatActivity() {
+class TodoListActivity : AppCompatActivity(), TodoListRecyclerViewAdapter.ListItemListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private var mTwoPane: Boolean = false
-    private lateinit var mAdapter: TodoListRecyclerViewAdapter
-    //private var mTodoList: MutableList<TodoItem> = ArrayList()
 
     private var mDatabase = TodoApp.database
+
+    private lateinit var mAdapter: TodoListRecyclerViewAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +70,7 @@ class TodoListActivity : AppCompatActivity() {
     }
 
     private fun loadTodoList() {
-        //Log.e(TAG, "loadTodoList")
+        Log.e(TAG, "loadTodoList")
         mDatabase?.todoItemDao()?.getAllTodoItems()
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
@@ -87,8 +88,6 @@ class TodoListActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_ADD_TODO && resultCode == RESULT_OK) {
             val newTodoTitle = data?.getStringExtra(KEY_NEW_TODO_TITLE) as String
             val date = data.getSerializableExtra(KEY_NEW_TODO_DATE) as Date
-            Log.e("date is ", date.toString())
-
             val newItem = TodoItem(0, newTodoTitle, date.time, false, false)
             saveNewItemToRoom(newItem)
         }
@@ -101,8 +100,24 @@ class TodoListActivity : AppCompatActivity() {
                 .subscribe()
     }
 
+    override fun toggleDone(isDone: Boolean, item: TodoItem) {
+        item.isDone = isDone
+        Single.fromCallable { mDatabase?.todoItemDao()?.updateItem(item) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+    }
+
+    override fun toggleStarred(isStarred: Boolean, item: TodoItem) {
+        item.isStarred = isStarred
+        Single.fromCallable { mDatabase?.todoItemDao()?.updateItem(item) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+    }
 
     companion object {
+        const val TAG = "TodoListActivity"
         const val REQUEST_CODE_ADD_TODO = 1
         const val KEY_NEW_TODO_TITLE = "title"
         const val KEY_NEW_TODO_DATE = "date"
