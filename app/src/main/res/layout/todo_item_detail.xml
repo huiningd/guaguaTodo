@@ -1,9 +1,167 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fi.huiningd.guaguatodo.TodoItemDetailFragment"
     android:id="@+id/todoitem_detail"
-    style="?android:attr/textAppearanceLarge"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context="fi.huiningd.guaguatodo.TodoItemDetailFragment" />
+    android:orientation="vertical">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/task" />
+
+<EditText
+    android:id="@+id/todo_edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="2dp"
+    android:textAppearance="?attr/textAppearanceListItem"
+    android:textSize="20sp"
+    app:layout_constraintLeft_toRightOf="@id/check_box"
+    tools:text="Take trash out and Take trash out " />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp"
+    android:text="Additional info" />
+
+<EditText
+    android:id="@+id/edit_text_extra_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/optional"
+    android:layout_marginBottom="16dp"
+    android:layout_marginRight="16dp" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/button_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/whiteBackground"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <TextView
+        android:id="@+id/date_text_view"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="11/15/2018" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/check_task_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/text_view_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:text="Mark task done" />
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/star_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@color/whiteBackground"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@drawable/ic_star_gray" />
+
+    <TextView
+        android:id="@+id/text_view_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Star task" />
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/delete_task"
+    android:layout_gravity="end"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Delete task" />
+
+    <ImageButton
+        android:id="@+id/button_delete_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@color/whiteBackground"
+        android:padding="2dp"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+</LinearLayout>
+
+    <TextView
+        android:id="@+id/error_text_view"
+        android:textAlignment="center"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textColor="@android:color/holo_red_light"
+        tools:text="Error message" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/button_cancel"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:text="@android:string/cancel" />
+
+    <Button
+        android:id="@+id/button_save"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:text="SAVE" />
+
+</LinearLayout>
+
+</LinearLayout>
