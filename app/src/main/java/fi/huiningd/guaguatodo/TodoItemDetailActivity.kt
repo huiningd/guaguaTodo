@@ -20,11 +20,6 @@ class TodoItemDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_todo_detail)
         setSupportActionBar(detail_toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -42,8 +37,10 @@ class TodoItemDetailActivity : AppCompatActivity() {
             // using a fragment transaction.
             val fragment = TodoItemDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(TodoItemDetailFragment.ARG_ITEM_ID,
-                            intent.getStringExtra(TodoItemDetailFragment.ARG_ITEM_ID))
+                    putSerializable(TodoItemDetailFragment.ARG_ITEM_ID,
+                            intent.getSerializableExtra(TodoItemDetailFragment.ARG_ITEM_ID))
+                    //putLong(TodoItemDetailFragment.ARG_ITEM_ID,
+                    //        intent.getLongExtra(TodoItemDetailFragment.ARG_ITEM_ID, 0))
                 }
             }
 
