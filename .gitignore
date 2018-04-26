@@ -1,8 +1,6 @@
 *.iml
 .gradle
 gradle.xml
-gradlew
-gradlew.bat
 /gradle
 /local.properties
 /.idea/*
@@ -18,4 +16,3 @@ misc.xml
 modules.xml
 runConfigurations.xml
 workspace.xml
-app/proguard-rules.pro
