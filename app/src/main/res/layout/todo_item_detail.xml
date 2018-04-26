@@ -20,6 +20,8 @@
     android:paddingTop="2dp"
     android:textAppearance="?attr/textAppearanceListItem"
     android:textSize="20sp"
+    android:inputType="text"
+    android:imeOptions="actionNext"
     app:layout_constraintLeft_toRightOf="@id/check_box"
     tools:text="Take trash out and Take trash out " />
 
@@ -27,15 +29,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingTop="16dp"
-    android:text="Additional info" />
+    android:text="@string/extra_info" />
 
 <EditText
     android:id="@+id/edit_text_extra_info"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:imeOptions="actionDone"
+    android:inputType="text"
     android:hint="@string/optional"
     android:layout_marginBottom="16dp"
-    android:layout_marginRight="16dp" />
+    android:layout_marginEnd="16dp" />
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -74,12 +78,14 @@
         android:id="@+id/text_view_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:text="Mark task done" />
+        android:paddingStart="8dp"
+        android:text="@string/mark_task_done" />
 
 </LinearLayout>
 
 <LinearLayout
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -89,8 +95,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/whiteBackground"
-        android:padding="8dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@drawable/ic_star_gray" />
 
