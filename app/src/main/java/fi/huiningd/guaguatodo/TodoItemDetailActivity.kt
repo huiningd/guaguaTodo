@@ -37,10 +37,8 @@ class TodoItemDetailActivity : AppCompatActivity() {
             // using a fragment transaction.
             val fragment = TodoItemDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(TodoItemDetailFragment.ARG_ITEM_ID,
-                            intent.getSerializableExtra(TodoItemDetailFragment.ARG_ITEM_ID))
-                    //putLong(TodoItemDetailFragment.ARG_ITEM_ID,
-                    //        intent.getLongExtra(TodoItemDetailFragment.ARG_ITEM_ID, 0))
+                    putLong(TodoItemDetailFragment.ARG_ITEM_ID,
+                            intent.getLongExtra(TodoItemDetailFragment.ARG_ITEM_ID, 0))
                 }
             }
 

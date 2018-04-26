@@ -32,7 +32,11 @@ class AddNewTodoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_new_todo)
 
         setToday()
+        setUpListeners()
+    }
 
+    private fun setUpListeners() {
+        // TODO: user should not be able to select a date older than today
         button_calendar!!.setOnClickListener {
             DatePickerDialog(this@AddNewTodoActivity,
                     mDatePickerListener,
@@ -53,11 +57,10 @@ class AddNewTodoActivity : AppCompatActivity() {
         button_cancel.setOnClickListener {
             finish()
         }
-
     }
 
     private fun setToday() {
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         today_text_view!!.text = sdf.format(mCalendar.time)
     }
 

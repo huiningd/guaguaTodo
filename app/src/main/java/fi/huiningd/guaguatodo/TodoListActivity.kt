@@ -20,7 +20,7 @@ import kotlin.collections.ArrayList
 
 
 /**
- * An activity representing a list of todoItems. This activity
+ * An activity representing a list of TodoItems. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
  * lead to a [TodoItemDetailActivity] representing
@@ -38,7 +38,6 @@ class TodoListActivity : AppCompatActivity(), TodoListRecyclerViewAdapter.ListIt
     private var mDatabase = TodoApp.database
 
     private lateinit var mAdapter: TodoListRecyclerViewAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +77,8 @@ class TodoListActivity : AppCompatActivity(), TodoListRecyclerViewAdapter.ListIt
                     mAdapter.updateList(todoList)
                     if (todoList.isNotEmpty()) {
                         empty_placeholder.visibility = View.GONE
+                    } else {
+                        empty_placeholder.visibility = View.VISIBLE
                     }
                 }
     }
