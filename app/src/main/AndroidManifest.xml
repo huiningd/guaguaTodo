@@ -32,6 +32,8 @@
         <activity
             android:name=".AddNewTodoActivity"
             android:label="@string/title_add_new_todo"
+            android:parentActivityName=".TodoListActivity"
+            android:theme="@style/AppTheme.NoActionBar"
         />
     </application>
 
