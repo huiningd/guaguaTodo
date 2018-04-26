@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.TextView
 import fi.huiningd.guaguatodo.data.TodoItem
 import kotlinx.android.synthetic.main.todo_item_content.view.*
@@ -68,45 +69,90 @@ class TodoListRecyclerViewAdapter(private val mParentActivity: TodoListActivity,
 
         holder.todoTitleView.tag = item
         holder.bind(item, mListItemListener)
+
     }
 
     override fun getItemCount(): Int {
         return mTodoList.size
     }
 
-    fun updateList(list: List<TodoItem>) {
+    fun updateList(newList: List<TodoItem>) {
         Log.e(TAG, "updateList")
-        mTodoList = list.toMutableList()
-        notifyDataSetChanged() // TODO make comparison with the old list, only refresh single item
+        notifyChanges(mTodoList, newList)
+        mTodoList = newList.toMutableList()
+    }
+
+    private fun notifyChanges(oldList: List<TodoItem>, newList: List<TodoItem>) {
+
+        val diff = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return oldList[oldItemPosition].uid == newList[newItemPosition].uid
+            }
+
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                return oldList[oldItemPosition] == newList[newItemPosition]
+            }
+
+            override fun getOldListSize() = oldList.size
+
+            override fun getNewListSize() = newList.size
+        })
+
+        diff.dispatchUpdatesTo(this)
+    }
+
+    private fun toggleStarred(wasStarred: Boolean, star: ImageButton) {
+        if (wasStarred) clearStarred(star)
+        else markStarred(star)
+    }
+
+    private fun markStarred(star: ImageButton) {
+        star.setBackgroundResource(0)
+        star.setBackgroundResource(R.drawable.ic_star_yellow)
+    }
+
+    private fun clearStarred(star: ImageButton) {
+        star.setBackgroundResource(0)
+        star.setBackgroundResource(R.drawable.ic_star_gray)
     }
 
     private fun toggleTextStrikeThru(isChecked: Boolean, textView: TextView) {
         if (isChecked) strikeThruText(textView)
-        else
-            textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        else clearStrikeThru(textView)
     }
 
     private fun strikeThruText(textView: TextView) {
         textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
     }
 
+    private fun clearStrikeThru(textView: TextView) {
+        textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+    }
+
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
         val todoTitleView: TextView = mView.todo_title
         private val checkBox: CheckBox = mView.check_box
+        private val star: ImageButton = mView.image_button_star
 
         fun bind(todoItem: TodoItem, mListener: ListItemListener?) {
             // Set listener to null so that the immediate isChecked does not trigger the listener
             checkBox.setOnCheckedChangeListener(null)
             checkBox.isChecked = todoItem.isDone
             if (todoItem.isDone) strikeThruText(todoTitleView)
-            if (todoItem.isStarred) {
-                // TODO
-            }
+            if (todoItem.isStarred) markStarred(star)
+            else clearStarred(star)
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 toggleTextStrikeThru(isChecked, todoTitleView)
                 mListener?.toggleDone(isChecked, todoItem)
             }
+
+            star.setOnClickListener({
+                val previousState = todoItem.isStarred
+                toggleStarred(previousState, it as ImageButton )
+                mListener?.toggleStarred(!previousState, todoItem)
+            })
 
             todoTitleView.text = todoItem.title
             todoTitleView.setOnClickListener(mDetailViewListener)
