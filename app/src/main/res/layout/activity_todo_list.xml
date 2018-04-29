@@ -36,8 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:layout_marginLeft="8dp"
-            app:srcCompat="@drawable/ic_add" />
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="0dp"
+            app:srcCompat="@drawable/ic_add"
+            android:contentDescription="@string/cd_plus_icon" />
 
         <TextView
             android:paddingTop="4dp"
@@ -77,10 +79,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:alpha="0.7"
-                android:src="@drawable/gua_empty_placeholder"/>
+                android:src="@drawable/gua_empty_placeholder"
+                android:contentDescription="@string/cd_empty_list_bg" />
 
         </LinearLayout>
-
 
     </FrameLayout>
 

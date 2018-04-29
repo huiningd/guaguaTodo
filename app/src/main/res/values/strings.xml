@@ -11,9 +11,16 @@
     <string name="what_is_your_task">What is your task?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="save">Save</string>
     <string name="confirm_delete">Delete this task?</string>
     <string name="extra_info">Additional info</string>
     <string name="mark_task_done">Mark task done</string>
+    <string name="star_task">Star task</string>
+    <string name="delete_task">Delete task</string>
 
     <string name="cd_calendar_button">calendar button</string>
+    <string name="cd_plus_icon">add new todo button</string>
+    <string name="cd_star_icon">star icon</string>
+    <string name="cd_trash_bin_icon">trash bin icon</string>
+    <string name="cd_empty_list_bg">empty list background</string>
 </resources>
