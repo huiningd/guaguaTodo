@@ -57,6 +57,7 @@
         <include layout="@layout/todo_list" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/empty_placeholder"
             android:orientation="vertical"
             android:layout_gravity="center_vertical"
@@ -67,9 +68,15 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
                 android:textAlignment="center"
+                android:textSize="18sp"
                 android:text="@string/please_add_todo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/gua_empty_placeholder"/>
 
         </LinearLayout>
 

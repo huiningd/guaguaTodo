@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Guagua Todo</string>
-    <string name="title_todo_list">TODO</string>
+    <string name="title_todo_list">Guagua TODO</string>
     <string name="title_todo_item_detail">Edit Todo Detail</string>
     <string name="title_add_new_todo">Add New Todo</string>
     <string name="add_todo">Add Todo</string>
-    <string name="please_add_todo">Hi! You don\'t have task! Click on "Add Todo" to add some.</string>
+    <string name="please_add_todo">Hi! You don\'t have task! \nClick on "Add Todo" to add some.</string>
     <string name="optional">Optional</string>
     <string name="error_task_empty">Task cannot be empty</string>
     <string name="task">Task</string>
