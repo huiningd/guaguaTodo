@@ -76,6 +76,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:alpha="0.7"
                 android:src="@drawable/gua_empty_placeholder"/>
 
         </LinearLayout>
