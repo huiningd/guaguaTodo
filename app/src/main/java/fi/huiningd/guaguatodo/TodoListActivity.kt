@@ -88,8 +88,9 @@ class TodoListActivity : AppCompatActivity(), TodoListRecyclerViewAdapter.ListIt
 
         if (requestCode == REQUEST_CODE_ADD_TODO && resultCode == RESULT_OK) {
             val newTodoTitle = data?.getStringExtra(KEY_NEW_TODO_TITLE) as String
+            val info = data.getStringExtra(KEY_NEW_TODO_INFO) as String
             val date = data.getSerializableExtra(KEY_NEW_TODO_DATE) as Date
-            val newItem = TodoItem(0, newTodoTitle, date.time, false, false)
+            val newItem = TodoItem(0, newTodoTitle, date.time, false, false, info)
             saveNewItemToRoom(newItem)
         }
     }
@@ -122,6 +123,7 @@ class TodoListActivity : AppCompatActivity(), TodoListRecyclerViewAdapter.ListIt
         const val REQUEST_CODE_ADD_TODO = 1
         const val KEY_NEW_TODO_TITLE = "title"
         const val KEY_NEW_TODO_DATE = "date"
+        const val KEY_NEW_TODO_INFO = "extra_info"
     }
 
 }

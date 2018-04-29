@@ -37,9 +37,6 @@
             android:label="@string/title_add_new_todo"
             android:parentActivityName=".TodoListActivity"
             android:theme="@style/AppTheme.NoActionBar">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="fi.huiningd.guaguatodo.TodoListActivity" />
         </activity>
     </application>
 
