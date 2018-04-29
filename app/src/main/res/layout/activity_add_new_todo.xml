@@ -54,7 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="What is your task?" />
+                android:labelFor="@+id/new_todo_edit_text"
+                android:text="@string/what_is_your_task" />
 
             <EditText
                 android:id="@+id/new_todo_edit_text"
@@ -75,7 +76,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/whiteBackground"
-                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar"
+                    android:contentDescription="@string/cd_calendar_button" />
 
                 <TextView
                     android:id="@+id/today_text_view"
@@ -90,10 +92,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
+                android:labelFor="@+id/extra_info"
                 android:text="@string/extra_info" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/extra_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"

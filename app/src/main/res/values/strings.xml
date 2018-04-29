@@ -8,9 +8,12 @@
     <string name="optional">Optional</string>
     <string name="error_task_empty">Task cannot be empty</string>
     <string name="task">Task</string>
+    <string name="what_is_your_task">What is your task?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="confirm_delete">Delete this task?</string>
     <string name="extra_info">Additional info</string>
     <string name="mark_task_done">Mark task done</string>
+
+    <string name="cd_calendar_button">calendar button</string>
 </resources>
