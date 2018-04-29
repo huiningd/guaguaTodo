@@ -109,18 +109,19 @@ class TodoItemDetailFragment : Fragment() {
 
     private fun validateAndSave(view: View) {
         val task = view.todo_edit_text.text.toString()
-        if (TextUtils.isEmpty(task))
+        if (TextUtils.isEmpty(task)) {
             view.error_text_view.setText(R.string.error_task_empty)
-        val extraInfo = view.edit_text_extra_info.text.toString()
-        if (TextUtils.isEmpty(extraInfo))
+        } else {
+            val extraInfo = view.edit_text_extra_info.text.toString()
+            mItem?.title = task
             mItem?.description = extraInfo
+            mItem?.date = mCalendar.time.time
+            mItem?.isDone = view.check_task_done.isChecked
+            mItem?.isStarred = mIsStarred
 
-        mItem?.title = task
-        mItem?.isDone = view.check_task_done.isChecked
-        mItem?.isStarred = mIsStarred
-
-        updateItem()
-        activity!!.finish()
+            updateItem()
+            activity!!.finish()
+        }
     }
 
     private fun deleteItem() {
