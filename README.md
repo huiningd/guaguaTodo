@@ -1,6 +1,7 @@
 # Guagua Todo
 
-A simple TODO app, branded by Guagua -- my soft and furry friend.
+A simple TODO app, named by Guagua -- my soft and furry friend.
+
 The app is written in Kotlin, uses RxJava and Room. 
 
 The app has 3 views:
