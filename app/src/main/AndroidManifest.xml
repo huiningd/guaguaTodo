@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".TodoListActivity"
             android:label="@string/title_todo_list"
@@ -20,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".TodoItemDetailActivity"
             android:label="@string/title_todo_item_detail"
@@ -29,12 +31,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fi.huiningd.guaguatodo.TodoListActivity" />
         </activity>
+
         <activity
             android:name=".AddNewTodoActivity"
             android:label="@string/title_add_new_todo"
             android:parentActivityName=".TodoListActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-        />
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="fi.huiningd.guaguatodo.TodoListActivity" />
+        </activity>
     </application>
 
 </manifest>
