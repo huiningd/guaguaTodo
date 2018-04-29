@@ -30,6 +30,7 @@ class AddNewTodoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_todo)
+        setSupportActionBar(add_new_toolbar)
 
         setToday()
         setUpListeners()
